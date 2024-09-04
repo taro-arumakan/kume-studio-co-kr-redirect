@@ -1,312 +1,390 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no" class="vv">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title></title>
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-5NDS5Q3S');</script>
- 
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1, user-scalable=no" class="vv">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title></title>
 
-    <!-- End Google Tag Manager -->
-    <!--@css(/layout/basic/css/common.css)-->
-    <!--@css(/layout/basic/css/bhs_layout.css)-->
-    <!--@css(/layout/basic/css/layout.css)-->
-    <!--@css(/layout/basic/css/custom_scroll.css)-->
-    <!--@css(/layout/basic/css/slinky.css)-->
-    <!--@css(/layout/basic/css/font-awesome.min.css)-->
-    <!--@css(/layout/basic/css/check.css)-->
+  <script>
+    /*
+    The code below is placed on the default site. The other site where you want to send visitors from Japan is kume-studio.jp
+    */
+    var jp_site = 'https://kume-studio.jp';
+    async function is_cafe24_admin() {
+      var res = window !== window.top && document.referrer.includes('cafe24');
+      if (res) {
+        console.log('detected access from cafe24 admin editor, not redirecting');
+      }
+      return res;
+    }
+    async function is_jp() {
+      console.log(`navigator.languages: ${navigator.languages}`);
+      var lang_kr = navigator.languages.indexOf('ko');
+      var lang_jp = navigator.languages.indexOf('ja');
+      console.log(`lang_kr: ${lang_kr}`);
+      console.log(`lang_jp: ${lang_jp}`);
+      if (lang_jp >= 0 && (lang_kr < 0 || lang_jp < lang_kr)) { console.log('detected jp in browser locales'); return true; } console.log('did not detect jp in browser locales, fallback to ip based location check'); var res = await fetch('https://ipapi.co/country/'); var country = await res.text(); console.log(`detected country from ip: ${country}`); return country == 'JP';
+    } (async () => {
+      const cafe24Admin = await is_cafe24_admin();
+      const jp = await is_jp();
+      if (!cafe24Admin && jp) {
+        console.log('redirect to Japan');
+        window.location = jp_site;
+      } else {
+        console.log('no action');
+      }
+    })();
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-5NDS5Q3S');</script>
 
-    
-    
-     <!--@css(/layout/basic/css/ec-base-ui.css)-->
-    <!--@css(/layout/basic/css/ec-base-paginate.css)-->
-    <!--@css(/layout/basic/css/ec-base-help.css)-->
-    <!--@css(/layout/basic/css/ec-base-product.css)-->
-    <!--@css(/layout/basic/css/ec-base-button.css)-->
-    <!--@css(/layout/basic/css/ec-base-box.css)-->
-    <!--@css(/layout/basic/css/ec-base-layer.css)-->
-    <!--@css(/layout/basic/css/ec-base-tab.css)-->
-    <!--@css(/layout/basic/css/ec-base-tooltip.css)-->
-    <!--@css(/layout/basic/css/ec-base-table.css)-->
-    <!--@css(/layout/basic/css/ec-base-fold.css)-->
-    <!--@css(/layout/basic/css/ec-base-prdInfo.css)-->
-    
-    <!--@css(/layout/basic/css/custom_scroll.css)-->
-<!--@css(/layout/basic/css/slide.css)-->
-<!--@css(/layout/basic/css/slide_theme.css)-->
-<!--@js(/layout/basic/js/custom_scroll.js)-->
-    
-    <!--@js(/layout/basic/js/slide.js)-->
 
-    <!-- 스마트디자인에서는 JQuery 1.4.4 버전이 내장되어있습니다. 추가로 호출하면 충돌이 생길 수 있습니다. -->
-    <!--@js(/layout/basic/js/ie_check.js)-->    
-    <!--@js(/layout/basic/js/common.js)-->
-    <!--@js(/layout/basic/js/slinky.js)-->
-    <!--@js(/layout/basic/js/custom_scroll.js)-->    
-    <!--@js(/layout/basic/js/check.js)-->      
-    <!--@js(/layout/basic/js/basic.js)-->    
-    <!--[if lt IE 10]>         
+  <!-- End Google Tag Manager -->
+  <!--@css(/layout/basic/css/common.css)-->
+  <!--@css(/layout/basic/css/bhs_layout.css)-->
+  <!--@css(/layout/basic/css/layout.css)-->
+  <!--@css(/layout/basic/css/custom_scroll.css)-->
+  <!--@css(/layout/basic/css/slinky.css)-->
+  <!--@css(/layout/basic/css/font-awesome.min.css)-->
+  <!--@css(/layout/basic/css/check.css)-->
+
+  <!--@css(/layout/basic/css/ec-base-ui.css)-->
+  <!--@css(/layout/basic/css/ec-base-paginate.css)-->
+  <!--@css(/layout/basic/css/ec-base-help.css)-->
+  <!--@css(/layout/basic/css/ec-base-product.css)-->
+  <!--@css(/layout/basic/css/ec-base-button.css)-->
+  <!--@css(/layout/basic/css/ec-base-box.css)-->
+  <!--@css(/layout/basic/css/ec-base-layer.css)-->
+  <!--@css(/layout/basic/css/ec-base-tab.css)-->
+  <!--@css(/layout/basic/css/ec-base-tooltip.css)-->
+  <!--@css(/layout/basic/css/ec-base-table.css)-->
+  <!--@css(/layout/basic/css/ec-base-fold.css)-->
+  <!--@css(/layout/basic/css/ec-base-prdInfo.css)-->
+
+  <!--@css(/layout/basic/css/custom_scroll.css)-->
+  <!--@css(/layout/basic/css/slide.css)-->
+  <!--@css(/layout/basic/css/slide_theme.css)-->
+  <!--@js(/layout/basic/js/custom_scroll.js)-->
+
+  <!--@js(/layout/basic/js/slide.js)-->
+
+  <!-- 스마트디자인에서는 JQuery 1.4.4 버전이 내장되어있습니다. 추가로 호출하면 충돌이 생길 수 있습니다. -->
+  <!--@js(/layout/basic/js/ie_check.js)-->
+  <!--@js(/layout/basic/js/common.js)-->
+  <!--@js(/layout/basic/js/slinky.js)-->
+  <!--@js(/layout/basic/js/custom_scroll.js)-->
+  <!--@js(/layout/basic/js/check.js)-->
+  <!--@js(/layout/basic/js/basic.js)-->
+  <!--[if lt IE 10]>         
         <style>select{background:none!important; padding:0!important}</style>
-    <![endif]-->    
-    <!--[if lt IE 9]>         
+    <![endif]-->
+  <!--[if lt IE 9]>         
         <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>    
     <![endif]-->
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KY6RT03DHJ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-KY6RT03DHJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
 
-      gtag('config', 'G-KY6RT03DHJ');
-    </script>
+    gtag('config', 'G-KY6RT03DHJ');
+  </script>
 
-</scripts>
-    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
-    <style>
-        @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
-        
-    </style>
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,900" rel="stylesheet">
+  <style>
+    @import url('http://fonts.googleapis.com/earlyaccess/notosanskr.css');
+  </style>
 
-<body id="layout" class="fixed_banner_active"> 
-    
-<!--@import(/fixed_banner.html)-->
-    
-    
-<div id="loading"></div>
-<div id="m_header">
+</head>
+
+<body id="layout" class="fixed_banner_active">
+
+  <!--@import(/fixed_banner.html)-->
+
+
+  <div id="loading"></div>
+  <div id="m_header">
     <div class="xi-bars"></div>
     <div class="m_logo_wrap">
-        <div class="m_logo"><a href="/"><img src="/web/upload/logo/n_logo_2.png"></a></div>
+      <div class="m_logo"><a href="/"><img src="/web/upload/logo/n_logo_2.png"></a></div>
     </div>
-    <div class="xi-cart" module="Layout_statelogon" style="width: 50px; display: flex;"><a href="/myshop/wish_list.html" style="margin-right: 10px;"><i class="xi-heart-o xi-2x"/></a>
-        <div module="Layout_orderBasketcount" style="position: relative;"><a href="/order/basket.html"><i class="xi-cart-o" style="font-size: 2em" /><div style="position: absolute; top: -12px; right: -12px; background: #000; color: #fff; border-radius: 100px; width: 18px; height: 18px; text-align: center; line-height: 18px; letter-spacing: 0.5px;">{$basket_count}</div></a></div>
+    <div class="xi-cart" module="Layout_statelogon" style="width: 50px; display: flex;"><a href="/myshop/wish_list.html" style="margin-right: 10px;"><i class="xi-heart-o xi-2x" /></a>
+      <div module="Layout_orderBasketcount" style="position: relative;"><a href="/order/basket.html"><i class="xi-cart-o" style="font-size: 2em" />
+          <div style="position: absolute; top: -12px; right: -12px; background: #000; color: #fff; border-radius: 100px; width: 18px; height: 18px; text-align: center; line-height: 18px; letter-spacing: 0.5px;">{$basket_count}</div>
+        </a></div>
     </div>
-    <div class="xi-cart" module="Layout_statelogoff" style="width: 50px; display: flex;"><a href="/myshop/wish_list.html" style="margin-right: 10px;"><i class="xi-heart-o xi-2x"/></a>
-        <div module="Layout_orderBasketcount" style="position: relative;"><a href="/order/basket.html"><i class="xi-cart-o" style="font-size: 2em" /><div style="position: absolute; top: -12px; right: -12px; background: #000; color: #fff; border-radius: 100px; width: 18px; height: 18px; text-align: center; line-height: 18px; letter-spacing: 0.5px;">{$basket_count}</div></a></div>
-    </div>           
-</div>
+    <div class="xi-cart" module="Layout_statelogoff" style="width: 50px; display: flex;"><a href="/myshop/wish_list.html" style="margin-right: 10px;"><i class="xi-heart-o xi-2x" /></a>
+      <div module="Layout_orderBasketcount" style="position: relative;"><a href="/order/basket.html"><i class="xi-cart-o" style="font-size: 2em" />
+          <div style="position: absolute; top: -12px; right: -12px; background: #000; color: #fff; border-radius: 100px; width: 18px; height: 18px; text-align: center; line-height: 18px; letter-spacing: 0.5px;">{$basket_count}</div>
+        </a></div>
+    </div>
+  </div>
 
-<style>
-    #mobile_wrap #searchBarForm{display:block; position:relative; margin:30px 15px; width:180px;}
-    #mobile_wrap #searchBarForm input{border:0; border-bottom:1px solid #000;}
-    #mobile_wrap #searchBarForm .xi-search{position:absolute; right:0; top:10px; padding:0; color:#000;}
-    .mbi-simpletalk-kakao a {width:40px;}
-</style>
-    
-<div id="mobile_mask"></div>    
-<div id="mobile_wrap_outer">    
+  <style>
+    #mobile_wrap #searchBarForm {
+      display: block;
+      position: relative;
+      margin: 30px 15px;
+      width: 180px;
+    }
+
+    #mobile_wrap #searchBarForm input {
+      border: 0;
+      border-bottom: 1px solid #000;
+    }
+
+    #mobile_wrap #searchBarForm .xi-search {
+      position: absolute;
+      right: 0;
+      top: 10px;
+      padding: 0;
+      color: #000;
+    }
+
+    .mbi-simpletalk-kakao a {
+      width: 40px;
+    }
+  </style>
+
+  <div id="mobile_mask"></div>
+  <div id="mobile_wrap_outer">
     <div id="mobile_wrap">
-        <div id="mobile">
-            <ul class="customMobile" style="box-sizing:border-box; padding: 10px 20px;">
-                 <div onclick="openMenu(1)" style="display: flex; justify-content: space-between; cursor:pointer;"><div>SHOP</div><div class="shop-icon">-</div></div>
-                     <ul class="shop" style="padding-left: 6px;">
-                         
-                         <li><a href="/product/list.html?cate_no=373">24FW 1'DROP(9/1~9/18)</a></li>
-                         <li><a href="/product/list.html?cate_no=314">ACTIVE SALE(8/9~9/15)</a></li>
-                         <li><a href="/product/list.html?cate_no=342">24SS</a><li>
-                         <li><a href="/product/list.html?cate_no=272">ALL</a></li>         
-                         <li><a href="/product/list.html?cate_no=273">OUTER</a></li>
-                         <li><a href="/product/list.html?cate_no=274">TOP</a></li>
-                         <li><a href="/product/list.html?cate_no=275">BOTTOM</a></li>
-                         <li><a href="/product/list.html?cate_no=276">DRESSES</a></li>  
-                         <li><a href="/product/list.html?cate_no=293">ACC</a></li>
-                            <li onclick="openMenu(2)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px;"><div>DENIM</div><div class="denim-icon">+</div></li>
-                             <ul class="denim" style="display: none; padding-left: 6px; color: #888888;">
-                                 <li><a href="/product/list.html?cate_no=352">Aisé(Semi-Wide)</a><li>
-                                 <li><a href="/product/list.html?cate_no=353">Joli(Semi-Bootcut)</a></li>
-                                 <li><a href="/product/list.html?cate_no=354">Délicat(Straight)</a></li>
-                                 <li><a href="/product/list.html?cate_no=356">Lâche(Lowrise-Wide)</a></li>  
-                                 <li><a href="/product/list.html?cate_no=364">ETC</a></li>
-                             </ul>
-                         <li style="margin-top: 20px;"><a href="/product/list.html?cate_no=308">SALE</a><li>
-                         
-                     </ul>
-                    <li onclick="openMenu(3)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;"><div>COLLECTION</div><div class="collection-icon">+</div></li>
-                    <ul class="collection" style="display: none; padding-left: 6px; color: #888888;">
-                         <li><a href="/product/lookbook_list.html?cate_no=379" style="color: #888888;">2024 FALL / WINTER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=345" style="color: #888888;">2024 SPRING / SUMMER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=336" style="color: #888888;">2023 FALL / WINTER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=321" style="color: #888888;">2023 SPRING / SUMMER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=313" style="color: #888888;">2022 FALL / WINTER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=300" style="color: #888888;">2022 SUMMER</a></li>
-                         <li><a href="/product/lookbook_list.html?cate_no=297" style="color: #888888;">2022 SPRING</a></li>
-                    </ul>
-                
-                    <li><a href="/store.html" style="padding-left: 0;">STORE</a><li>
-                    
-                    <li onclick="openMenu(6)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;"><div>ACCOUNT</div><div class="account-icon">+</div></li>
-                    <ul class="account" style="display: none; padding-left: 6px;">
-                        <li module="Layout_statelogoff"><a href="/member/agreement.html" style="color: #888888;">JOIN US</a></li>
-                        <li module="Layout_statelogoff"><a href="/member/login.html" style="color: #888888;">LOGIN</a></li>
-                        <li module="Layout_statelogon"><a href="{$action_logout}" style="color: #888888;">LOGOUT</a></li>
-                        <li><a href="/myshop/index.html" style="color: #888888;">MY PAGE</a></li>
-                        <li><a href="/myshop/order/list.html" style="color: #888888;">MY ORDER</a></li>
-                    </ul>
-                
-                    <li><a href="/board/free/list.html?board_no=1" style="padding-left: 0;">NOTICE</a><li>
-                
-                    <li onclick="openMenu(4)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;"><div>LANGUAGE</div><div class="language-icon">+</div></li>
-                    <ul class="language" style="display: none; padding-left: 6px; color: #888888;">
-                        <li><a href="http://kume-studio.co.kr" target="_blank">KR</a></li>
-                        <li><a href="https://kume-studio.jp" target="_blank">JP</a></li>
-                        <li><a href="https://kumekorea.cafe24.com/shop2" target="_blank">EN</a></li>
-                    </ul>       
-                </div>
-            
-                <div module="Layout_SearchHeader">
-                    <!--
+      <div id="mobile">
+        <ul class="customMobile" style="box-sizing:border-box; padding: 10px 20px;">
+          <div onclick="openMenu(1)" style="display: flex; justify-content: space-between; cursor:pointer;">
+            <div>SHOP</div>
+            <div class="shop-icon">-</div>
+          </div>
+          <ul class="shop" style="padding-left: 6px;">
+
+            <li><a href="/product/list.html?cate_no=373">24FW 1'DROP(9/1~9/18)</a></li>
+            <li><a href="/product/list.html?cate_no=314">ACTIVE SALE(8/9~9/15)</a></li>
+            <li><a href="/product/list.html?cate_no=342">24SS</a>
+            <li>
+            <li><a href="/product/list.html?cate_no=272">ALL</a></li>
+            <li><a href="/product/list.html?cate_no=273">OUTER</a></li>
+            <li><a href="/product/list.html?cate_no=274">TOP</a></li>
+            <li><a href="/product/list.html?cate_no=275">BOTTOM</a></li>
+            <li><a href="/product/list.html?cate_no=276">DRESSES</a></li>
+            <li><a href="/product/list.html?cate_no=293">ACC</a></li>
+            <li onclick="openMenu(2)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px;">
+              <div>DENIM</div>
+              <div class="denim-icon">+</div>
+            </li>
+            <ul class="denim" style="display: none; padding-left: 6px; color: #888888;">
+              <li><a href="/product/list.html?cate_no=352">Aisé(Semi-Wide)</a>
+              <li>
+              <li><a href="/product/list.html?cate_no=353">Joli(Semi-Bootcut)</a></li>
+              <li><a href="/product/list.html?cate_no=354">Délicat(Straight)</a></li>
+              <li><a href="/product/list.html?cate_no=356">Lâche(Lowrise-Wide)</a></li>
+              <li><a href="/product/list.html?cate_no=364">ETC</a></li>
+            </ul>
+            <li style="margin-top: 20px;"><a href="/product/list.html?cate_no=308">SALE</a>
+            <li>
+
+          </ul>
+          <li onclick="openMenu(3)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;">
+            <div>COLLECTION</div>
+            <div class="collection-icon">+</div>
+          </li>
+          <ul class="collection" style="display: none; padding-left: 6px; color: #888888;">
+            <li><a href="/product/lookbook_list.html?cate_no=379" style="color: #888888;">2024 FALL / WINTER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=345" style="color: #888888;">2024 SPRING / SUMMER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=336" style="color: #888888;">2023 FALL / WINTER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=321" style="color: #888888;">2023 SPRING / SUMMER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=313" style="color: #888888;">2022 FALL / WINTER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=300" style="color: #888888;">2022 SUMMER</a></li>
+            <li><a href="/product/lookbook_list.html?cate_no=297" style="color: #888888;">2022 SPRING</a></li>
+          </ul>
+
+          <li><a href="/store.html" style="padding-left: 0;">STORE</a>
+          <li>
+
+          <li onclick="openMenu(6)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;">
+            <div>ACCOUNT</div>
+            <div class="account-icon">+</div>
+          </li>
+          <ul class="account" style="display: none; padding-left: 6px;">
+            <li module="Layout_statelogoff"><a href="/member/agreement.html" style="color: #888888;">JOIN US</a></li>
+            <li module="Layout_statelogoff"><a href="/member/login.html" style="color: #888888;">LOGIN</a></li>
+            <li module="Layout_statelogon"><a href="{$action_logout}" style="color: #888888;">LOGOUT</a></li>
+            <li><a href="/myshop/index.html" style="color: #888888;">MY PAGE</a></li>
+            <li><a href="/myshop/order/list.html" style="color: #888888;">MY ORDER</a></li>
+          </ul>
+
+          <li><a href="/board/free/list.html?board_no=1" style="padding-left: 0;">NOTICE</a>
+          <li>
+
+          <li onclick="openMenu(4)" style="display: flex; justify-content: space-between; cursor:pointer; padding: 5px 0;">
+            <div>LANGUAGE</div>
+            <div class="language-icon">+</div>
+          </li>
+          <ul class="language" style="display: none; padding-left: 6px; color: #888888;">
+            <li><a href="http://kume-studio.co.kr" target="_blank">KR</a></li>
+            <li><a href="https://kume-studio.jp" target="_blank">JP</a></li>
+            <li><a href="https://kumekorea.cafe24.com/shop2" target="_blank">EN</a></li>
+          </ul>
+      </div>
+
+      <div module="Layout_SearchHeader">
+        <!--
                     $product_page=/product/detail.html
                     $category_page=/product/list.html
                     -->
-                    <fieldset>
-                        <legend>검색</legend>
-                        {$form.keyword}<a href="#none" onclick="{$action_search_submit}" class="xi-search"></a></fieldset>
-                </div>
-            </ul>
-        </div>
+        <fieldset>
+          <legend>검색</legend>
+          {$form.keyword}<a href="#none" onclick="{$action_search_submit}" class="xi-search"></a>
+        </fieldset>
+      </div>
+      </ul>
     </div>
-</div>
-<div id="header_wrap_outer">    
+  </div>
+  </div>
+  <div id="header_wrap_outer">
     <div id="header_wrap">
-        <div class="nav">
-            <ul>
-               <!--@import(/left_menu.html)-->
-            </ul>
-        </div>  
-        <div class="logo"><a href="/" style="width: 200px;"><img src="/web/upload/logo/n_logo_2.png"></a></div>
-        <div class="header_right">        
-            <ul>
-                <!--@import(/header_menu_right.html)-->
-            </ul>
-        </div>
+      <div class="nav">
+        <ul>
+          <!--@import(/left_menu.html)-->
+        </ul>
+      </div>
+      <div class="logo"><a href="/" style="width: 200px;"><img src="/web/upload/logo/n_logo_2.png"></a></div>
+      <div class="header_right">
+        <ul>
+          <!--@import(/header_menu_right.html)-->
+        </ul>
+      </div>
     </div>
-</div>
-    
+  </div>
 
-<div id="contents">
+
+  <div id="contents">
     <!--@contents-->
-</div>
+  </div>
 
-    
-    
-<div id="footer">
+
+
+  <div id="footer">
     <div class="copy">
-        <div class="footer_menu">
-            <span style="padding:0 10px 0 10px;"></span>
-            <a href="/about.html">ABOUT </a>
-            <span style="padding:0 10px 0 10px;"></span>
-            <a href="/member/mall_agreement.html">AGREEMENT</a>
-            <span style="padding:0 10px 0 10px;"></span>
-            <a href="/member/privacy.html">PRIVACY POLICY</a>
-            <span style="padding:0 10px 0 10px;"></span>
-            <a href="/board/urgency/urgency.html">CONTACT</a>
-        </div>
-        <div class="sns">
-            <a href="https://www.facebook.com/kume.official" target="_blank" class="fa fa-facebook"></a>
-            <a href="https://www.instagram.com/kume_official/" target="_blank" class="fa fa-instagram"></a>
-            <a href="https://kumeofficial.tumblr.com/" target="_blank" class="fa fa-tumblr"></a>
-        </div>
-        <div class="company">
-            <div><span>COMPANY : 주식회사 쿠메 </span></span> ADDRESS : 서울특별시 서초구 잠원동 48-1 5층 우편번호 06529 </span></div>
-            <div><span>BUSINESS NO : 515-88-00043 CEO : 김앨리스 <span>MAIL-ORDER LICENSE : 제2015-서울강남-03356호</span></span> TEL : 010-5149-8857</div>
-            <div>EMAIL : kume.studios@gmail.com</div>
-            <div>COPYRIGHT © KUME. All rights reserved.</div>
-        </div>                    
-    </div>    
-</div>
-   
-   
-    
-<!-- 참고: 결제를 위한 필수 영역 -->
-<div id="progressPaybar" style="display:none;">
+      <div class="footer_menu">
+        <span style="padding:0 10px 0 10px;"></span>
+        <a href="/about.html">ABOUT </a>
+        <span style="padding:0 10px 0 10px;"></span>
+        <a href="/member/mall_agreement.html">AGREEMENT</a>
+        <span style="padding:0 10px 0 10px;"></span>
+        <a href="/member/privacy.html">PRIVACY POLICY</a>
+        <span style="padding:0 10px 0 10px;"></span>
+        <a href="/board/urgency/urgency.html">CONTACT</a>
+      </div>
+      <div class="sns">
+        <a href="https://www.facebook.com/kume.official" target="_blank" class="fa fa-facebook"></a>
+        <a href="https://www.instagram.com/kume_official/" target="_blank" class="fa fa-instagram"></a>
+        <a href="https://kumeofficial.tumblr.com/" target="_blank" class="fa fa-tumblr"></a>
+      </div>
+      <div class="company">
+        <div><span>COMPANY : 주식회사 쿠메 </span></span> ADDRESS : 서울특별시 서초구 잠원동 48-1 5층 우편번호 06529 </span></div>
+        <div><span>BUSINESS NO : 515-88-00043 CEO : 김앨리스 <span>MAIL-ORDER LICENSE : 제2015-서울강남-03356호</span></span> TEL : 010-5149-8857</div>
+        <div>EMAIL : kume.studios@gmail.com</div>
+        <div>COPYRIGHT © KUME. All rights reserved.</div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- 참고: 결제를 위한 필수 영역 -->
+  <div id="progressPaybar" style="display:none;">
     <div id="progressPaybarBackground" class="layerProgress"></div>
     <div id="progressPaybarView">
-        <div class="box">
-            <p class="graph">
-                <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/txt_progress.gif" alt="현재 결제가 진행중입니다." /></span>
-                <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/img_loading.gif" alt="" /></span>
-            </p>
-            <p class="txt">
-                본 결제 창은 결제완료 후 자동으로 닫히며,결제 진행 중에 본 결제 창을 닫으시면<br />
-                주문이 되지 않으니 결제 완료 될 때 까지 닫지 마시기 바랍니다.
-            </p>
-        </div>
+      <div class="box">
+        <p class="graph">
+          <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/txt_progress.gif" alt="현재 결제가 진행중입니다." /></span>
+          <span><img src="http://img.echosting.cafe24.com/skin/base_ko_KR/layout/img_loading.gif" alt="" /></span>
+        </p>
+        <p class="txt">
+          본 결제 창은 결제완료 후 자동으로 닫히며,결제 진행 중에 본 결제 창을 닫으시면<br />
+          주문이 되지 않으니 결제 완료 될 때 까지 닫지 마시기 바랍니다.
+        </p>
+      </div>
     </div>
-</div>
-<!-- //참고 -->
-    
-<script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-<script type="text/javascript">
+  </div>
+  <!-- //참고 -->
+
+  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
+  <script type="text/javascript">
     window.jQuery1_11_2 = jQuery.noConflict(true);
-    
+
     function openMenu(openType) {
-        // 오픈이 되어있는 class 확인 후 텍스트 자동으로 바뀌도록 수정
-        if (openType == 1) { // SHOP
-            if ($('.shop').is(":visible")) {
-                $('.shop').hide();
-                $('.shop-icon').text('+');
-            } else {
-                $('.shop').show();
-                $('.shop-icon').text('-');
-            }
+      // 오픈이 되어있는 class 확인 후 텍스트 자동으로 바뀌도록 수정
+      if (openType == 1) { // SHOP
+        if ($('.shop').is(":visible")) {
+          $('.shop').hide();
+          $('.shop-icon').text('+');
+        } else {
+          $('.shop').show();
+          $('.shop-icon').text('-');
         }
-        if (openType == 2) { // DENIM
-            if ($('.denim').is(":visible")) {
-                $('.denim').hide();
-                $('.denim-icon').text('+');
-            } else {
-                $('.denim').show();
-                $('.denim-icon').text('-');
-            }
+      }
+      if (openType == 2) { // DENIM
+        if ($('.denim').is(":visible")) {
+          $('.denim').hide();
+          $('.denim-icon').text('+');
+        } else {
+          $('.denim').show();
+          $('.denim-icon').text('-');
         }
-        if (openType == 3) { //COLLECTION
-            if ($('.collection').is(":visible")) {
-                $('.collection').hide();
-                $('.collection-icon').text('+');
-            } else {
-                $('.collection').show();
-                $('.collection-icon').text('-');
-            }
+      }
+      if (openType == 3) { //COLLECTION
+        if ($('.collection').is(":visible")) {
+          $('.collection').hide();
+          $('.collection-icon').text('+');
+        } else {
+          $('.collection').show();
+          $('.collection-icon').text('-');
         }
-        if (openType == 4) { //LANGUAGE
-            if ($('.language').is(":visible")) {
-                $('.language').hide();
-                $('.language-icon').text('+');
-            } else {
-                $('.language').show();
-                $('.language-icon').text('-');
-            }
+      }
+      if (openType == 4) { //LANGUAGE
+        if ($('.language').is(":visible")) {
+          $('.language').hide();
+          $('.language-icon').text('+');
+        } else {
+          $('.language').show();
+          $('.language-icon').text('-');
         }
-        if (openType == 5) { //BOARD
-            if ($('.board').is(":visible")) {
-                $('.board').hide();
-                $('.board-icon').text('+');
-            } else {
-                $('.board').show();
-                $('.board-icon').text('-');
-            }
+      }
+      if (openType == 5) { //BOARD
+        if ($('.board').is(":visible")) {
+          $('.board').hide();
+          $('.board-icon').text('+');
+        } else {
+          $('.board').show();
+          $('.board-icon').text('-');
         }
-        if (openType == 6) { //ACCOUNT
-            if ($('.account').is(":visible")) {
-                $('.account').hide();
-                $('.account-icon').text('+');
-            } else {
-                $('.account').show();
-                $('.account-icon').text('-');
-            }
+      }
+      if (openType == 6) { //ACCOUNT
+        if ($('.account').is(":visible")) {
+          $('.account').hide();
+          $('.account-icon').text('+');
+        } else {
+          $('.account').show();
+          $('.account-icon').text('-');
         }
+      }
     }
-</script>    
-    
+  </script>
+
 
 
 </body>
+
 </html>

@@ -19,6 +19,21 @@
       }
       return res;
     }
+    async function is_jp_by_ip(url) {
+      var res = await fetch(url);
+      if (!res.ok) {
+        throw new Error(`HTTP response error: ${res.status}`);
+      }
+      var country = '';
+      if (url.includes('/country')) {
+        country = await res.text();
+      } else {
+        var res = await res.json()
+        country = res['country'];
+      }
+      console.log(`detected country from ip: ${country}`);
+      return country == 'JP'
+    }
     async function is_jp() {
       console.log(`navigator.languages: ${navigator.languages}`);
       var lang_kr = navigator.languages.indexOf('ko');
@@ -30,21 +45,30 @@
         return true;
       }
       console.log('did not detect jp in browser locales, fallback to ip based location check');
-      var res = await fetch('https://ipapi.co/country/');
-      var country = await res.text();
-      console.log(`detected country from ip: ${country}`);
-      return country == 'JP';
-    } (async () => {
+      for (const url of ['https://ipapi.co/country/', 'https://ipinfo.io/json']) {
+        try {
+          console.log(`calling ${url}`);
+          res = await is_jp_by_ip(url);
+          return res;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+    }
+    (async () => {
       const cafe24Admin = await is_cafe24_admin();
-      const jp = await is_jp();
-      if (!cafe24Admin && jp) {
-        console.log('redirect to Japan');
-        window.location = jp_site;
-      } else {
-        console.log('no action');
+      if (!cafe24Admin) {
+        const jp = await is_jp();
+        if (jp) {
+          console.log('redirect to Japan');
+          window.location = jp_site;
+        } else {
+          console.log('no action');
+        }
       }
     })();
   </script>
+
   <!-- Google Tag Manager -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
